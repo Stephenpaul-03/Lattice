@@ -1,0 +1,93 @@
+{
+  "welcome": {
+    "title": "Hi, I’m",
+    "description": "A growing documentation of the things I read, make, question, and learn.",
+    "intro": "This is where I keep the notes, references, questions, and connections that shape what I’m learning.",
+    "points": [
+      {
+        "title": "Capture the useful parts",
+        "description": "Notes are written in markdown and organized into subjects that are easy to browse.",
+        "icon": "book"
+      },
+      {
+        "title": "Follow the threads",
+        "description": "Use the sidebar or search to move between ideas, references, and unfinished questions.",
+        "icon": "compass"
+      },
+      {
+        "title": "Keep it in progress",
+        "description": "These notes are allowed to change as I understand more and revisit old ideas.",
+        "icon": "sparkles"
+      }
+    ],
+    "supportLabel": "Support the project",
+    "startLabel": "Start exploring"
+  },
+  "search": {
+    "title": "Search Lattice",
+    "description": "Jump to a topic across every subject.",
+    "placeholder": "Search topics across all subjects…",
+    "recentHeading": "Recently visited",
+    "emptyRecent": "No recent topics. Start typing to search.",
+    "noResults": "No matching topics found."
+  },
+  "support": {
+    "title": "Support Lattice",
+    "description": "Lattice is an independent learning project. If it has helped you, a small contribution helps keep new subjects and lessons moving.",
+    "primaryAction": "Buy me a coffee",
+    "qrAction": "Scan QR code",
+    "copyAction": "Copy support link instead",
+    "copiedLabel": "Link copied",
+    "contactHeading": "Keep in touch",
+    "projectsHeading": "More from the studio",
+    "projectsDescription": "New experiments, references, and small tools.",
+    "projectsAction": "View the project list",
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "portfolio": "Portfolio"
+    },
+    "qrTitle": "Scan to support",
+    "qrDescription": "Point your camera at the code to make a contribution.",
+    "revealQr": "Reveal QR code",
+    "qrHint": "Tap to unblur"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let’s talk",
+    "description": "Have feedback, a question, or an idea for Lattice? Reach out through any of the channels below.",
+    "note": "Email is the best way to get in touch. You can also follow the project and connect on social media.",
+    "links": {
+      "email": "Send an email",
+      "github": "View GitHub",
+      "linkedin": "Connect on LinkedIn"
+    }
+  },
+  "notFound": {
+    "eyebrow": "Lattice / 404",
+    "title": "This page is still a blank space.",
+    "description": "The topic you’re looking for doesn’t exist here yet, or it may have moved.",
+    "backLabel": "Back to home"
+  },
+  "globalHome": {
+    "eyebrow": "Lattice / Home",
+    "title": "Things I’m learning.",
+    "description": "this is where I document what I read, understand, question, and come back to as my thinking develops.",
+    "searchPlaceholder": "Search my notes or subjects…",
+    "workspaceHeading": "Browse my notes",
+    "noResults": "I couldn’t find a note matching that search.",
+    "openLabel": "View note",
+    "workspaces": {
+      "Template": "A personal record of notes, references, experiments, and things I’m learning."
+    }
+  },
+  "workspaceLoader": {
+    "status": "Preparing workspace",
+    "workspaces": {
+      "Template": {
+        "title": "Opening Lattice Template",
+        "description": "Preparing the guide to workspaces, markdown lessons, navigation, and the rest of Lattice."
+      }
+    }
+  }
+}

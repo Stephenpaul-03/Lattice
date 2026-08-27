@@ -1,14 +1,13 @@
-import { ThemeProvider } from "@/components/theme-provider"
-import { ModeToggle } from "./components/mode-toggle"
+import { AppShell } from "@/components/layout/AppShell"
+import { ThemeProvider } from "@/components/theme/theme-provider"
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <ModeToggle/>
-    </div>
+    <ThemeProvider defaultTheme="dark" storageKey="lattice-ui-theme">
+      <AppShell />
     </ThemeProvider>
   )
 }
+
 
 export default App
