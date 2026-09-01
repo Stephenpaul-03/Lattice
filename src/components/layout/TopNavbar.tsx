@@ -1,4 +1,4 @@
-import { ChevronDown, Coffee, MessageCircle, Search } from "lucide-react"
+import { ChevronDown, MessageCircle, Search } from "lucide-react"
 
 import { ModeToggle } from "@/components/theme/mode-toggle"
 import { useTheme } from "@/components/theme/theme-context"
@@ -20,7 +20,6 @@ type TopNavbarProps = {
   onOpenCommand: () => void
   activeSubject: Subject
   onSelectSubject: (subject: Subject, event: React.MouseEvent) => void
-  onOpenSupport?: () => void
   onOpenContact?: () => void
 }
 
@@ -28,7 +27,6 @@ export function TopNavbar({
   onOpenCommand,
   activeSubject,
   onSelectSubject,
-  onOpenSupport,
   onOpenContact,
 }: TopNavbarProps) {
   const { theme } = useTheme()
@@ -108,16 +106,6 @@ export function TopNavbar({
             className="border-zinc-200 bg-white text-zinc-600 shadow-none hover:bg-zinc-100 hover:text-zinc-950 dark:border-white/[0.1] dark:bg-white/[0.045] dark:text-zinc-400 dark:hover:bg-white/[0.075] dark:hover:text-zinc-100 cursor-pointer"
           >
             <MessageCircle className="size-4" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={onOpenSupport}
-            aria-label="Support Project"
-            title="Support"
-            className="border-zinc-200 bg-white text-zinc-600 shadow-none hover:bg-zinc-100 hover:text-zinc-950 dark:border-white/[0.1] dark:bg-white/[0.045] dark:text-zinc-400 dark:hover:bg-white/[0.075] dark:hover:text-zinc-100 cursor-pointer"
-          >
-            <Coffee className="size-4" />
           </Button>
           <ModeToggle />
         </div>

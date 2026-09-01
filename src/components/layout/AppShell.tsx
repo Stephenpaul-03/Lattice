@@ -17,7 +17,6 @@ import { PropertyRenderer } from "@/components/property/PropertyRenderer"
 import { Sidebar } from "@/components/layout/Sidebar"
 import { TopNavbar } from "@/components/layout/TopNavbar"
 import { OutlineSidebar } from "@/components/layout/OutlineSidebar"
-import { SupportModal } from "@/components/dialogs/SupportModal"
 import type { NavigationPageData, SidebarCategoryData, SidebarItemData } from "@/types/navigation"
 import { sitePath, siteRoot } from "@/lib/site-path"
 
@@ -89,7 +88,9 @@ export function AppShell() {
   const [activeSectionTitle, setActiveSectionTitle] = useState<string>()
 
   // Collapsible States
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() =>
+    typeof window !== "undefined" && window.innerWidth < 768,
+  )
   const [isOutlineCollapsed, setIsOutlineCollapsed] = useState(false)
   const [splashCoords, setSplashCoords] = useState<{ x: number; y: number } | null>(null)
 
@@ -161,7 +162,6 @@ export function AppShell() {
   const [activeHeadingId, setActiveHeadingId] = useState<string | null>(null)
 
   // Welcome overlay and modal states
-  const [isSupportOpen, setIsSupportOpen] = useState(false)
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [isWelcomeOpen, setIsWelcomeOpen] = useState(() => {
     return localStorage.getItem("lattice-welcomed") !== "true"
@@ -492,7 +492,6 @@ export function AppShell() {
         onOpenCommand={() => setIsCommandOpen(true)}
         activeSubject={activeSubject}
         onSelectSubject={handleSelectSubject}
-        onOpenSupport={() => setIsSupportOpen(true)}
         onOpenContact={() => setIsContactOpen(true)}
       />
       <div className="flex h-[calc(100vh-4rem)] min-w-0 overflow-hidden flex-col">
@@ -584,10 +583,6 @@ export function AppShell() {
           setActiveSubject(targetSubject)
           setActivePath("/")
         }}
-      />
-      <SupportModal
-        open={isSupportOpen}
-        onOpenChange={setIsSupportOpen}
       />
       <ContactModal
         open={isContactOpen}

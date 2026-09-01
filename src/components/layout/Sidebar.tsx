@@ -21,10 +21,10 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        "h-full shrink-0 overflow-hidden border-r border-zinc-200 bg-white/92 backdrop-blur-xl transition-[width,opacity] duration-300 ease-in-out dark:border-white/[0.08] dark:bg-[#07080b]/92",
-        "max-md:fixed max-md:top-16 max-md:bottom-0 max-md:left-0 max-md:z-50 max-md:h-[calc(100vh-4rem)]",
-        isCollapsed ? "w-0 border-r-0 opacity-0 pointer-events-none" : "w-[260px] opacity-100"
+        "sidebar-shell h-full shrink-0 overflow-hidden border-r border-zinc-200 bg-white/92 backdrop-blur-xl dark:border-white/[0.08] dark:bg-[#07080b]/92",
+        "max-md:fixed max-md:top-16 max-md:bottom-0 max-md:left-0 max-md:z-50 max-md:h-[calc(100vh-4rem)] max-md:transform-gpu",
       )}
+      data-collapsed={isCollapsed}
     >
 
       <div className="flex h-full w-[260px] flex-col">

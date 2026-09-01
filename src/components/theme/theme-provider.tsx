@@ -76,26 +76,6 @@ export function ThemeProvider({
     }, 0)
   }, [theme])
 
-  useEffect(() => {
-    if (!window.matchMedia) {
-      return
-    }
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-    const syncSystemTheme = (event: MediaQueryListEvent) => {
-      const nextTheme = event.matches ? "dark" : "light"
-
-      localStorage.setItem(storageKey, nextTheme)
-      setTheme(nextTheme)
-    }
-
-    mediaQuery.addEventListener("change", syncSystemTheme)
-
-    return () => {
-      mediaQuery.removeEventListener("change", syncSystemTheme)
-    }
-  }, [storageKey])
-
   const value = {
     theme,
     setTheme: (nextTheme: Theme, coords?: { x: number; y: number }) => {
