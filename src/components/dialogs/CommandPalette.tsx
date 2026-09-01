@@ -13,6 +13,7 @@ import {
 import { SUBJECTS } from "@/constants/subjects"
 import { parseSidebarJson } from "@/constants/sidebar"
 import copy from "@/constants/ui-copy.json"
+import { sitePath } from "@/lib/site-path"
 
 export type SearchResultItem = {
   path: string
@@ -69,8 +70,8 @@ export function CommandPalette({
           // Home/Root item for subject
           let homeResolvedUrl = ""
           const homeCandidates = [
-            `/content/${subject.id}/home.md`,
-            `/content/${subject.id}/index.md`
+            sitePath(`/content/${subject.id}/home.md`),
+            sitePath(`/content/${subject.id}/index.md`)
           ]
           for (const url of homeCandidates) {
             try {
@@ -105,9 +106,9 @@ export function CommandPalette({
                 const singleDigitPrefix = String(index + 1)
 
                 const candidates = [
-                  `/content/${subject.id}/${categorySegment}/${slugSegment}.md`,
-                  `/content/${subject.id}/${categorySegment}/${twoDigitPrefix}-${slugSegment}.md`,
-                  `/content/${subject.id}/${categorySegment}/${singleDigitPrefix}-${slugSegment}.md`
+                  sitePath(`/content/${subject.id}/${categorySegment}/${slugSegment}.md`),
+                  sitePath(`/content/${subject.id}/${categorySegment}/${twoDigitPrefix}-${slugSegment}.md`),
+                  sitePath(`/content/${subject.id}/${categorySegment}/${singleDigitPrefix}-${slugSegment}.md`)
                 ]
 
                 for (const url of candidates) {

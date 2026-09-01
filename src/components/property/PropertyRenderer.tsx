@@ -16,6 +16,7 @@ import type { NavigationPageData } from "@/types/navigation"
 import { DocumentLayout } from "@/components/property/layouts/DocumentLayout"
 import { SplitLayout } from "@/components/property/layouts/SplitLayout"
 import { parseMarkdown, type QuizData, type Frontmatter } from "@/lib/markdown-parser"
+import { sitePath } from "@/lib/site-path"
 import { QuizCard } from "@/components/property/layouts/QuizCard"
 
 
@@ -50,7 +51,7 @@ export function PropertyRenderer({
 
     const categorySegment = parentLabel ? parentLabel : ""
     const slugSegment = currentPage.slug ? currentPage.slug : "home"
-    const base = `/content/${activeSubject.id}/${categorySegment ? categorySegment + "/" : ""}`
+    const base = sitePath(`/content/${activeSubject.id}/${categorySegment ? categorySegment + "/" : ""}`)
 
     async function fetchContent() {
       if (currentPage.resolvedUrl) {

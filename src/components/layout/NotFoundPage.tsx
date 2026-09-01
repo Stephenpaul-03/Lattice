@@ -1,6 +1,7 @@
 import iconDark from "@/assets/icon-dark.png"
 import iconLight from "@/assets/icon-light.png"
 import copy from "@/constants/ui-copy.json"
+import { siteRoot } from "@/lib/site-path"
 
 export function NotFoundPage() {
   return (
@@ -20,7 +21,7 @@ export function NotFoundPage() {
           {copy.notFound.description}
         </p>
         <a
-          href="/"
+          href={siteRoot}
           className="mt-8 inline-flex items-center rounded-lg bg-zinc-950 px-4 py-2.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5 dark:bg-zinc-50 dark:text-zinc-950"
         >
           {copy.notFound.backLabel}

@@ -1,3 +1,5 @@
+import { sitePath } from "@/lib/site-path"
+
 export interface Subject {
   id: string
   label: string
@@ -5,5 +7,5 @@ export interface Subject {
 }
 
 export const SUBJECTS: Subject[] = [
-  { id: "Template", label: "Lattice Template", sidebarUrl: "/content/Template_Sidebar.json" },
+  { id: "Template", label: "Lattice Template", sidebarUrl: sitePath("/content/Template_Sidebar.json") },
 ];

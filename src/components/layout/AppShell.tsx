@@ -19,15 +19,19 @@ import { TopNavbar } from "@/components/layout/TopNavbar"
 import { OutlineSidebar } from "@/components/layout/OutlineSidebar"
 import { SupportModal } from "@/components/dialogs/SupportModal"
 import type { NavigationPageData, SidebarCategoryData, SidebarItemData } from "@/types/navigation"
+import { sitePath, siteRoot } from "@/lib/site-path"
 
 const initialActivePath = "/"
 
 function parseUrl(): { subjectId: string; pagePath: string } | { isNotFound: true } | null {
   if (typeof window === "undefined") return null
   const pathname = window.location.pathname
-  if (!pathname || pathname === "/") return null
+  if (!pathname || pathname === "/" || pathname === siteRoot) return null
 
-  const segment = pathname.substring(1) // remove leading "/"
+  const root = siteRoot.endsWith("/") ? siteRoot.slice(0, -1) : siteRoot
+  const segment = pathname.startsWith(`${root}/`)
+    ? pathname.substring(root.length + 1)
+    : pathname.substring(1)
   const matchedSubject = SUBJECTS.find((s) =>
     segment.toLowerCase().startsWith(s.id.toLowerCase() + "-")
   )
@@ -129,7 +133,7 @@ export function AppShell() {
   }
 
   const handleGoToGlobalHome = () => {
-    window.history.pushState({}, "", "/")
+    window.history.pushState({}, "", siteRoot)
     setActiveSubject(SUBJECTS[0])
     setActivePath("/")
     setPendingSlug(null)
@@ -228,8 +232,8 @@ export function AppShell() {
       slug = currentItem.slug
     }
 
-    const expectedPathname = `/${activeSubject.id}-${slug}`
-    if (isNotFound || pendingSlug || (window.location.pathname === "/" && isGlobalHome)) return
+    const expectedPathname = sitePath(`/${activeSubject.id}-${slug}`)
+    if (isNotFound || pendingSlug || (window.location.pathname === siteRoot && isGlobalHome)) return
     if (window.location.pathname !== expectedPathname) {
       window.history.pushState(
         { subjectId: activeSubject.id, pagePath: slug },
@@ -249,8 +253,8 @@ export function AppShell() {
         // Resolve active subject home page
         let homePageResolved = parsed.homePage
         const homeCandidates = [
-          `/content/${activeSubject.id}/home.md`,
-          `/content/${activeSubject.id}/index.md`
+          sitePath(`/content/${activeSubject.id}/home.md`),
+          sitePath(`/content/${activeSubject.id}/index.md`)
         ]
         for (const url of homeCandidates) {
           try {
@@ -280,9 +284,9 @@ export function AppShell() {
                 const singleDigitPrefix = String(index + 1)
                 
                 const candidates = [
-                  `/content/${activeSubject.id}/${categorySegment}/${slugSegment}.md`,
-                  `/content/${activeSubject.id}/${categorySegment}/${twoDigitPrefix}-${slugSegment}.md`,
-                  `/content/${activeSubject.id}/${categorySegment}/${singleDigitPrefix}-${slugSegment}.md`
+                  sitePath(`/content/${activeSubject.id}/${categorySegment}/${slugSegment}.md`),
+                  sitePath(`/content/${activeSubject.id}/${categorySegment}/${twoDigitPrefix}-${slugSegment}.md`),
+                  sitePath(`/content/${activeSubject.id}/${categorySegment}/${singleDigitPrefix}-${slugSegment}.md`)
                 ]
 
                 for (const url of candidates) {
