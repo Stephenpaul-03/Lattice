@@ -27,14 +27,14 @@ const contactLinks = [
     icon: Mail,
   },
   {
-    label: copy.contact.links.github,
-    href: "https://github.com/stephenpaul-03",
-    icon: Github,
+    label: copy.contact.links.linkedin,
+    href: "https://www.linkedin.com/in/stephen-paul-i/",
+    icon: Linkedin,
   },
   {
-    label: copy.contact.links.linkedin,
-    href: "https://www.linkedin.com",
-    icon: Linkedin,
+    label: copy.contact.links.github,
+    href: "https://github.com/Stephenpaul-03",
+    icon: Github,
   },
 ]
 
