@@ -1,61 +1,43 @@
 # Lattice
 
-Lattice is a markdown-based learning workspace for collecting notes, references, questions, and connected ideas. Subjects provide the top-level navigation, while lessons keep the source material close to the thinking it supports.
+<p align="center">
+  <img src="src/assets/icon-light.png" alt="Lattice logo" width="120" />
+</p>
 
-## Features
+<p align="center"><strong>A learning workspace for connecting the dots before they wander off.</strong></p>
 
-- Subject-based workspaces with JSON-defined sidebars
-- Markdown lessons with optional frontmatter and split layouts
-- Search across subjects and recently visited topics
-- Light and dark themes
-- Quiz blocks for guided concept checks
+Lattice is where I put the things I am trying to understand. It is a place for notes, references, questions, examples, useful rabbit holes, and ideas that are not quite finished enough to call conclusions.
 
-## Tech stack
+I built it around a simple belief: learning rarely happens in a straight line. One idea points to another, a question opens three more questions, and yesterday’s confident explanation occasionally needs a small, respectful rewrite.
 
-- React 19 and TypeScript
-- Vite
-- Tailwind CSS 4
-- Radix UI and shadcn/ui patterns
-- `marked` for Markdown parsing and Prism for code highlighting
+## What Lattice is for
 
-## Getting started
+Lattice turns that wonderfully tangled process into a set of calm, readable learning spaces. Each subject can have its own vocabulary, categories, lessons, and path through the material.
 
-Requirements: Node.js 18+ and npm.
+I can use it for:
 
-```sh
-npm install
-npm run dev
-```
+- Building personal study guides and reference notes
+- Turning research into a sequence of lessons
+- Keeping technical concepts, examples, and questions together
+- Creating documentation that can grow as my understanding improves
+- Making connections between subjects instead of keeping every note on its own island
 
-Open the local URL printed by Vite. To test a production build:
+## What it can do
 
-```sh
-npm run build
-npm run preview
-```
+- Organize notes into switchable subject workspaces
+- Give every subject its own overview, sidebar, categories, and lesson paths
+- Render Markdown with headings, lists, links, images, tables, and code
+- Support split layouts when a topic benefits from explanation beside an example
+- Add quizzes and concept checks directly inside a lesson
+- Search across subjects and jump to a topic with the command palette
+- Keep track of recently visited lessons so useful threads are easy to return to
+- Offer downloadable pages for notes I want to keep outside the app
+- Provide a comfortable reading experience in light or dark mode
 
-## Content model
+## How I think about it
 
-A subject is wired together by a registration entry, a sidebar definition, and Markdown content:
+Lattice is not trying to be a perfectly arranged encyclopedia. It is more like a trellis: a structure that helps ideas climb, branch, and find one another.
 
-```text
-src/constants/subjects.ts
-public/content/<SubjectId>_Sidebar.json
-public/content/<SubjectId>/home.md
-public/content/<SubjectId>/<Category>/<lesson-slug>.md
-```
+Some notes are polished lessons. Some are reminders to investigate something later. Some begin as a question and end up changing the shape of the whole subject. That is allowed here. The point is to keep learning visible, connected, and useful.
 
-Sidebar topic paths determine the lesson route. The loader looks for the matching slug under the category folder and also supports `01-<slug>.md` and `1-<slug>.md` filename prefixes.
-
-For the expected JSON shape, frontmatter options, quiz syntax, and a complete example, see [USAGE.md](USAGE.md). [ADDING_SUBJECTS.md](ADDING_SUBJECTS.md) contains the quick checklist.
-
-## Development commands
-
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start the Vite development server |
-| `npm run build` | Type-check and create a production build |
-| `npm run lint` | Run ESLint |
-| `npm run preview` | Serve the production build locally |
-
-Run `npm run build`, `npm run lint`, and `git diff --check` before committing changes.
+Lattice is structured enough to follow a path, but flexible enough to admit that the path may need rerouting.
