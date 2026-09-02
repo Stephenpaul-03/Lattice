@@ -5,10 +5,63 @@ import { Dialog as DialogPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
+let openDialogCount = 0
+
 function Dialog({
+  open,
+  defaultOpen,
+  onOpenChange,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="dialog" {...props} />
+  const [internalOpen, setInternalOpen] = React.useState(defaultOpen ?? false)
+  const markerRef = React.useRef(`dialog-${Math.random().toString(36).slice(2)}`)
+  const hasHistoryEntryRef = React.useRef(false)
+  const isOpen = open ?? internalOpen
+  const changeOpenRef = React.useRef<(nextOpen: boolean) => void>(() => {})
+
+  changeOpenRef.current = (nextOpen: boolean) => {
+    if (open === undefined) setInternalOpen(nextOpen)
+    onOpenChange?.(nextOpen)
+  }
+
+  React.useEffect(() => {
+    if (!isOpen) return
+
+    openDialogCount += 1
+    document.documentElement.dataset.appDialogOpen = "true"
+
+    const marker = markerRef.current
+    if (!hasHistoryEntryRef.current) {
+      window.history.pushState({ ...window.history.state, __appDialog: marker }, "")
+      hasHistoryEntryRef.current = true
+    }
+
+    const handlePopState = (event: PopStateEvent) => {
+      if (hasHistoryEntryRef.current && event.state?.__appDialog !== marker) {
+        hasHistoryEntryRef.current = false
+        changeOpenRef.current(false)
+      }
+    }
+
+    window.addEventListener("popstate", handlePopState)
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+      openDialogCount = Math.max(0, openDialogCount - 1)
+      if (openDialogCount === 0) delete document.documentElement.dataset.appDialogOpen
+    }
+  }, [isOpen])
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (!nextOpen && hasHistoryEntryRef.current) {
+      hasHistoryEntryRef.current = false
+      if (window.history.state?.__appDialog === markerRef.current) {
+        window.history.back()
+      }
+    }
+    changeOpenRef.current(nextOpen)
+  }
+
+  return <DialogPrimitive.Root data-slot="dialog" open={isOpen} onOpenChange={handleOpenChange} {...props} />
 }
 
 function DialogTrigger({

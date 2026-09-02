@@ -196,10 +196,16 @@ export function AppShell() {
     sidebarCategories: [],
     sidebarItems: [],
   })
+  const [isNavigationReady, setIsNavigationReady] = useState(false)
+
+  useEffect(() => {
+    setIsNavigationReady(false)
+  }, [activeSubject])
 
   // Handle browser Back/Forward navigation
   useEffect(() => {
     function handlePopState() {
+      if (document.documentElement.dataset.appDialogOpen === "true") return
       const urlInfo = parseUrl()
       if (urlInfo && "subjectId" in urlInfo) {
         const sub = SUBJECTS.find((s) => s.id === urlInfo.subjectId)
@@ -325,6 +331,7 @@ export function AppShell() {
             const foundItem = filteredItems.find((item) => item.slug === pendingSlug)
             if (!foundItem) {
               setNavData({ homePage: homePageResolved, sidebarCategories: filteredCategories, sidebarItems: filteredItems })
+              setIsNavigationReady(true)
               setIsNotFound(true)
               setPendingSlug(null)
               return
@@ -346,11 +353,13 @@ export function AppShell() {
           sidebarCategories: filteredCategories,
           sidebarItems: filteredItems,
         })
+        setIsNavigationReady(true)
         setIsNotFound(false)
         setActivePath(targetPath)
       })
       .catch((err) => {
         console.error("Failed to load sidebar configuration:", err)
+        setIsNavigationReady(true)
       })
   }, [activePath, activeSubject, pendingSlug, isNotFound])
 
@@ -480,21 +489,29 @@ export function AppShell() {
   }
 
   function handleScrollToHeading(id: string) {
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" })
-    }
+    const heading = document.getElementById(id)
+    const scrollContainer = document.querySelector<HTMLElement>("main[data-content-scroll]")
+    if (!heading || !scrollContainer) return
+
+    // Keep the browser viewport fixed and move only the document pane.
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+    const containerTop = scrollContainer.getBoundingClientRect().top
+    const headingTop = heading.getBoundingClientRect().top
+    const targetTop = scrollContainer.scrollTop + headingTop - containerTop - 24
+    scrollContainer.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" })
+
+    if (window.innerWidth < 768) setIsOutlineCollapsed(true)
   }
 
   const layoutContent = (
-    <div className="h-dvh overflow-hidden bg-zinc-50 text-zinc-950 antialiased dark:bg-[#050608] dark:text-zinc-100">
+    <div className="fixed inset-0 overflow-hidden bg-zinc-50 text-zinc-950 antialiased dark:bg-[#050608] dark:text-zinc-100">
       <TopNavbar
         onOpenCommand={() => setIsCommandOpen(true)}
         activeSubject={activeSubject}
         onSelectSubject={handleSelectSubject}
         onOpenContact={() => setIsContactOpen(true)}
       />
-      <div className="flex h-[calc(100dvh-4rem)] min-h-0 min-w-0 overflow-hidden flex-col">
+      <div className="flex h-[calc(100vh-4rem)] min-h-0 min-w-0 overflow-hidden flex-col">
         <BreadcrumbBar
           currentPage={currentPage}
           parentLabel={parentLabel}
@@ -532,15 +549,19 @@ export function AppShell() {
             onSelectItem={handleSelectPath}
             isCollapsed={isSidebarCollapsed}
           />
-          <main className="touch-scroll-y mobile-bottom-space min-h-0 min-w-0 flex-1 overflow-y-auto bg-zinc-50 [scrollbar-color:rgb(161_161_170)_transparent] [scrollbar-width:thin] dark:bg-[#050608] dark:[scrollbar-color:rgb(63_63_70)_transparent]">
-            <PropertyRenderer
-              onActiveSectionChange={setActiveSectionTitle}
-              activeSubject={activeSubject}
-              currentPage={currentPage}
-              parentLabel={parentLabel}
-              fallback={<NotFoundPage />}
-              onHeadingsLoaded={setHeadings}
-            />
+          <main data-content-scroll className="touch-scroll-y mobile-bottom-space min-h-0 min-w-0 flex-1 overflow-y-auto bg-zinc-50 [scrollbar-color:rgb(161_161_170)_transparent] [scrollbar-width:thin] dark:bg-[#050608] dark:[scrollbar-color:rgb(63_63_70)_transparent]">
+            {isNavigationReady ? (
+              <PropertyRenderer
+                onActiveSectionChange={setActiveSectionTitle}
+                activeSubject={activeSubject}
+                currentPage={currentPage}
+                parentLabel={parentLabel}
+                fallback={<NotFoundPage />}
+                onHeadingsLoaded={setHeadings}
+              />
+            ) : (
+              <div className="flex h-64 items-center justify-center text-sm text-zinc-500">Loading content…</div>
+            )}
           </main>
 
           {/* Outline Sidebar placed on the right next to main content */}
