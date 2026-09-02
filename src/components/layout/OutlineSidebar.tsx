@@ -38,7 +38,7 @@ export function OutlineSidebar({
     >
 
       <div className="flex h-full w-[240px] flex-col">
-        <div className="flex-1 overflow-y-auto p-4 space-y-6 [scrollbar-color:rgb(161_161_170)_transparent] [scrollbar-width:thin] dark:[scrollbar-color:rgb(63_63_70)_transparent]">
+        <div className="touch-scroll-y flex-1 overflow-y-auto p-4 space-y-6 [scrollbar-color:rgb(161_161_170)_transparent] [scrollbar-width:thin] dark:[scrollbar-color:rgb(63_63_70)_transparent]">
           {/* Progress */}
           {totalHeadings > 0 && (
             <section className="space-y-2.5 pb-4 border-b border-zinc-100 dark:border-white/[0.05]">

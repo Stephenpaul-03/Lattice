@@ -29,7 +29,7 @@ export function GlobalHomePage({ onSelectWorkspace, showWelcome, onDismissWelcom
   }, [query])
 
   return (
-    <div className="h-screen overflow-y-auto bg-zinc-50 text-zinc-950 antialiased dark:bg-[#050608] dark:text-zinc-100">
+    <div className="touch-scroll-y h-dvh overflow-y-auto bg-zinc-50 text-zinc-950 antialiased dark:bg-[#050608] dark:text-zinc-100">
       <header className="flex h-16 items-center justify-between border-b border-zinc-200 bg-white/80 px-5 backdrop-blur-2xl dark:border-white/[0.08] dark:bg-[#07080b]/78 md:px-8">
         <div className="flex items-center gap-3">
           <img src={logoSrc} alt="" className="size-8" aria-hidden="true" />
@@ -41,7 +41,7 @@ export function GlobalHomePage({ onSelectWorkspace, showWelcome, onDismissWelcom
         <ModeToggle />
       </header>
 
-      <main className="mx-auto w-full max-w-6xl px-5 py-16 md:px-8 md:py-24 home-reveal">
+      <main className="home-reveal mx-auto w-full max-w-6xl px-5 pt-16 pb-[calc(7rem+env(safe-area-inset-bottom))] md:px-8 md:py-24">
         <section className="mx-auto max-w-3xl text-center">
           <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-zinc-500">{copy.globalHome.eyebrow}</p>
           <h1 className="mt-5 text-4xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-6xl">{copy.globalHome.title}</h1>

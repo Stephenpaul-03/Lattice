@@ -487,14 +487,14 @@ export function AppShell() {
   }
 
   const layoutContent = (
-    <div className="h-screen overflow-hidden bg-zinc-50 text-zinc-950 antialiased dark:bg-[#050608] dark:text-zinc-100">
+    <div className="h-dvh overflow-hidden bg-zinc-50 text-zinc-950 antialiased dark:bg-[#050608] dark:text-zinc-100">
       <TopNavbar
         onOpenCommand={() => setIsCommandOpen(true)}
         activeSubject={activeSubject}
         onSelectSubject={handleSelectSubject}
         onOpenContact={() => setIsContactOpen(true)}
       />
-      <div className="flex h-[calc(100vh-4rem)] min-w-0 overflow-hidden flex-col">
+      <div className="flex h-[calc(100dvh-4rem)] min-h-0 min-w-0 overflow-hidden flex-col">
         <BreadcrumbBar
           currentPage={currentPage}
           parentLabel={parentLabel}
@@ -513,7 +513,7 @@ export function AppShell() {
           onDownloadPDF={handleDownloadPDF}
           onDownloadMD={handleDownloadMD}
         />
-        <div className="flex min-w-0 flex-1 overflow-hidden relative">
+        <div className="relative flex min-h-0 min-w-0 flex-1 overflow-hidden">
           {!isSidebarCollapsed && (
             <div 
               className="md:hidden fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ease-in-out cursor-pointer" 
@@ -532,7 +532,7 @@ export function AppShell() {
             onSelectItem={handleSelectPath}
             isCollapsed={isSidebarCollapsed}
           />
-          <main className="min-w-0 flex-1 overflow-y-auto bg-zinc-50 [scrollbar-color:rgb(161_161_170)_transparent] [scrollbar-width:thin] dark:bg-[#050608] dark:[scrollbar-color:rgb(63_63_70)_transparent]">
+          <main className="touch-scroll-y mobile-bottom-space min-h-0 min-w-0 flex-1 overflow-y-auto bg-zinc-50 [scrollbar-color:rgb(161_161_170)_transparent] [scrollbar-width:thin] dark:bg-[#050608] dark:[scrollbar-color:rgb(63_63_70)_transparent]">
             <PropertyRenderer
               onActiveSectionChange={setActiveSectionTitle}
               activeSubject={activeSubject}

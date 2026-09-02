@@ -30,7 +30,7 @@ export function Sidebar({
       <div className="flex h-full w-[260px] flex-col">
         <nav
           aria-label="Workspace navigation"
-          className="min-h-0 flex-1 space-y-5 overflow-y-auto px-3 py-4 [scrollbar-color:rgb(161_161_170)_transparent] [scrollbar-width:thin] dark:[scrollbar-color:rgb(63_63_70)_transparent]"
+          className="touch-scroll-y min-h-0 flex-1 space-y-5 overflow-y-auto px-3 py-4 [scrollbar-color:rgb(161_161_170)_transparent] [scrollbar-width:thin] dark:[scrollbar-color:rgb(63_63_70)_transparent]"
         >
           {/* Home Link */}
           <div className="space-y-1">
